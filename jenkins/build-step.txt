@@ -1,0 +1,41 @@
+# Run udclient command to create new component version
+pwd
+ls -al
+
+rm -f README.md
+rm -rf .git
+
+pwd
+ls -al
+
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+export UCD_AUTH_TOKEN="9ec486c6-c7bc-4040-ac1d-f6b6b3e040c7"
+export UCD_WEB_URL="https://169.62.212.57:8444"
+               
+echo $BUILD_NUMBER
+CURRENT_BUILD="2.0.${BUILD_NUMBER}"
+               
+# Create new component version
+echo "Create new component version"
+/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN createVersion -component CP4I-ACEIVT-API -name $CURRENT_BUILD
+/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN addVersionLink -component CP4I-ACEIVT-API -version $CURRENT_BUILD -linkName "Jenkins Pipeline" -link http://52.116.6.138:8081/job/ace-ivt-frontend/${BUILD_NUMBER}/
+/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN addVersionFiles -component CP4I-ACEIVT-API -version $CURRENT_BUILD -base "/opt/jenkins-agent/workspace/ace-ivt-frontend/"
+               
+# Add a component status to allow it to pass gates in UCD
+#echo "Adding component status"
+#/opt/IBM/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN addVersionStatus -component Online-Botanical-APP -version $CURRENT_BUILD -status "Unit Tests Passed"
+        
+# Create snapshot
+#echo "Create new snapshot"
+#cp urbancode/snapshot.json .
+#sed -i "s/MYNAME/$CURRENT_BUILD/g" snapshot.json
+#cat snapshot.json
+#/opt/IBM/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN createSnapshot snapshot.json
+               
+# Deploy snapshot to DEV environment
+#cp urbancode/deploy-snapshot.json .
+#sed -i "s/MYNAME/$CURRENT_BUILD/g" deploy-snapshot.json
+#cat deploy-snapshot.json
+#udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN requestApplicationProcess deploy-snapshot.json
+
+echo All done
