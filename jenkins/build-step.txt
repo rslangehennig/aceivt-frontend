@@ -4,6 +4,7 @@ ls -al
 
 rm -f README.md
 rm -rf .git
+rm -rf jenkins
 
 pwd
 ls -al
