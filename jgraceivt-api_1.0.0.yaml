@@ -1,0 +1,88 @@
+swagger: '2.0'
+info:
+  title: JGRACEIVT
+  version: 1.0.0
+  description: JGRACEIVT
+  x-ibm-name: jgraceivt
+paths:
+  /hello/{mode}:
+    get:
+      operationId: getMode
+      responses:
+        '200':
+          description: The operation was successful.
+          schema:
+            $ref: '#/definitions/jgr-response'
+      produces:
+        - application/json
+      description: Retrieve mode
+      parameters:
+        - required: true
+          name: mode
+          in: path
+          type: string
+  /hello:
+    get:
+      operationId: getHello
+      responses:
+        '200':
+          description: The operation was successful.
+          schema:
+            $ref: '#/definitions/jgr-response'
+      produces:
+        - application/json
+      description: Retrieve hello
+basePath: /jgraceivt/v1
+definitions:
+  jgr-response:
+    type: object
+    properties:
+      code:
+        type: string
+      msg:
+        type: string
+      time:
+        type: string
+schemes:
+  - https
+x-ibm-configuration:
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  gateway: datapower-api-gateway
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - invoke:
+          title: invoke
+          version: 2.0.0
+          verb: keep
+          target-url: $(target-url)$(request.path)
+          follow-redirects: false
+          timeout: 60
+          parameter-control:
+            type: allowlist
+            values: []
+          header-control:
+            type: blocklist
+            values: []
+          inject-proxy-headers: true
+          persistent-connection: true
+    finally: []
+  properties:
+    target-url:
+      value: TARGET_URL
+      description: The URL of the target service
+      encoded: false
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+  servers:
+    - url: API_GATEWAY_URL
+      description: ''
+      type:
+        - production
+        - development

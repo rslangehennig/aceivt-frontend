@@ -1,0 +1,43 @@
+info:
+  version: 1.0.1
+  title: JGRACEIVT Product
+  name: jgraceivt-product
+gateways:
+  - datapower-api-gateway
+plans:
+  default-plan:
+    title: Default Plan
+    description: Default Plan
+    rate-limits:
+      default:
+        value: 10/1minute
+        hard-limit: false
+    apis:
+      jgraceivt1.0.0: {}
+  premium-plan:
+    title: Premium Plan
+    description: Premium Plan
+    approval: true
+    rate-limits:
+      default:
+        value: unlimited
+    burst-limits:
+      Default burst-limit:
+        value: 10/1second
+    apis:
+      jgraceivt1.0.0: {}
+apis:
+  jgraceivt1.0.0:
+    $ref: jgraceivt-api_1.0.0.yaml
+visibility:
+  view:
+    type: public
+    orgs: []
+    tags: []
+    enabled: true
+  subscribe:
+    type: authenticated
+    orgs: []
+    tags: []
+    enabled: true
+product: 1.0.0
