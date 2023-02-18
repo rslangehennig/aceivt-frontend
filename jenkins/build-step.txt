@@ -31,12 +31,12 @@ echo "Create new component version"
 #cp urbancode/snapshot.json .
 #sed -i "s/MYNAME/$CURRENT_BUILD/g" snapshot.json
 #cat snapshot.json
-#/opt/IBM/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN createSnapshot snapshot.json
+#/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN createSnapshot snapshot.json
                
 # Deploy snapshot to DEV environment
 #cp urbancode/deploy-snapshot.json .
 #sed -i "s/MYNAME/$CURRENT_BUILD/g" deploy-snapshot.json
 #cat deploy-snapshot.json
-#udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN requestApplicationProcess deploy-snapshot.json
+/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN requestApplicationProcess deploy.json
 
 echo All done
