@@ -1,0 +1,30 @@
+# Run udclient to trigger deployment
+pwd
+ls -al
+
+rm -f README.md
+rm -rf .git
+rm -rf jenkins
+cp urbancode/deploy.json ..
+rm -rf urbancode
+
+pwd
+ls -al
+
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+export UCD_AUTH_TOKEN="9ec486c6-c7bc-4040-ac1d-f6b6b3e040c7"
+export UCD_WEB_URL="https://169.62.212.57:8444"
+               
+echo $BUILD_NUMBER
+CURRENT_BUILD="2.0.${BUILD_NUMBER}"
+               
+# Deploy snapshot to DEV environment
+#cp urbancode/deploy-snapshot.json .
+#sed -i "s/MYNAME/$CURRENT_BUILD/g" deploy-snapshot.json
+#cat deploy-snapshot.json
+
+/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN requestApplicationProcess ../deploy.json
+
+rm -f ../deploy.json
+
+echo All done
