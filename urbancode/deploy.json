@@ -2,6 +2,7 @@
   "application": "CP4I-ACEIVT",
   "applicationProcess": "Deploy Backend and Frontend API",
   "environment": "DEV",
+  "onlyChanged": "false",
   "versions": [
     {
       "version": "latest",
