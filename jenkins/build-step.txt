@@ -1,10 +1,10 @@
-# Run udclient command to create new component version
-pwd
 ls -al
 
 rm -f README.md
 rm -rf .git
 rm -rf jenkins
+cp urbancode/deploy.json ..
+rm -rf urbancode
 
 pwd
 ls -al
@@ -31,12 +31,12 @@ echo "Create new component version"
 #cp urbancode/snapshot.json .
 #sed -i "s/MYNAME/$CURRENT_BUILD/g" snapshot.json
 #cat snapshot.json
-#/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN createSnapshot snapshot.json
+#/opt/IBM/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN createSnapshot snapshot.json
                
 # Deploy snapshot to DEV environment
 #cp urbancode/deploy-snapshot.json .
 #sed -i "s/MYNAME/$CURRENT_BUILD/g" deploy-snapshot.json
 #cat deploy-snapshot.json
-/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN requestApplicationProcess deploy.json
+/opt/IBM/udclient/udclient -weburl $UCD_WEB_URL -authtoken $UCD_AUTH_TOKEN requestApplicationProcess ../deploy.json
 
-echo All done
+rm -f ../deploy.json
