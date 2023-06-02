@@ -39,7 +39,7 @@ node {
           
           export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
           export UCD_AUTH_TOKEN="9ec486c6-c7bc-4040-ac1d-f6b6b3e040c7"
-          export UCD_WEB_URL="https://169.62.212.57:8444"
+          export UCD_WEB_URL="https://xxx.xx.xxx.xx:84"
           
           # Clean up files
           pwd
@@ -70,8 +70,8 @@ node {
          sh '''#!/bin/bash
 
             export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
-            export UCD_AUTH_TOKEN="9ec486c6-c7bc-4040-ac1d-f6b6b3e040c7"
-            export UCD_WEB_URL="https://169.62.212.57:8444"
+            export UCD_AUTH_TOKEN="xxxxx-xxx-xxx-xxx-xxxx
+            export UCD_WEB_URL="https://xxx.xx.xxx.xx:84"
             
             # Create snapshot
             echo "Create new snapshot using 2.1.$BUILD_NUMBER"
